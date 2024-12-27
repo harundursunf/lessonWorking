@@ -57,7 +57,7 @@ const Home = () => {
                             Bu site, akademik başarılarınızı artırmanıza yardımcı olmak için tasarlandı. Matematik ve Türkçe netlerinizi girerek hedeflerinize daha kolay ulaşabilirsiniz.
                         </p>
                         <div className="mt-6 bg-gradient-to-r from-blue-500 to-blue-800 rounded-full p-4 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-300" onClick={handleExploreClick}>
-                            {isAuth ? <button className='text-white font-bold text-sm'>Daha fazlasını keşfet</button> : <button className='text-white font-bold text-sm'>Kayıt ol</button>}
+                            {isAuth ? <button className='text-white font-bold text-sm'>Daha fazlasını keşfet, kendini bul!</button> : <button className='text-white font-bold text-sm'>Kayıt ol</button>}
                         </div>
                     </div>
 
