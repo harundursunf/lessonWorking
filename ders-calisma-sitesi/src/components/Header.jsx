@@ -159,7 +159,7 @@ const Header = () => {
                                         </li>
                                         <li>
                                             <Link to="/personal" className="px-4 py-2 hover:bg-gray-100 block">
-                                                Günlük Hedef
+                                                Günlük Hedefler
                                             </Link>
                                         </li>
                                     </ul>
