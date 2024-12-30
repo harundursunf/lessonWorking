@@ -1,0 +1,79 @@
+Adana: Çukurova Üniversitesi, Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi
+Adıyaman: Adıyaman Üniversitesi
+Afyonkarahisar: Afyon Kocatepe Üniversitesi, Afyonkarahisar Sağlık Bilimleri Üniversitesi
+Ağrı: Ağrı İbrahim Çeçen Üniversitesi
+Aksaray: Aksaray Üniversitesi
+Amasya: Amasya Üniversitesi
+Ankara: Ankara Üniversitesi, Hacettepe Üniversitesi, Gazi Üniversitesi, Orta Doğu Teknik Üniversitesi, Yıldırım Beyazıt Üniversitesi, Ankara Yıldırım Beyazıt Üniversitesi, Ankara Hacı Bayram Veli Üniversitesi, Çankaya Üniversitesi, Atılım Üniversitesi, TOBB Ekonomi ve Teknoloji Üniversitesi, Ufuk Üniversitesi, Başkent Üniversitesi
+Antalya: Akdeniz Üniversitesi, Antalya Bilim Üniversitesi, Alanya Alaaddin Keykubat Üniversitesi
+Ardahan: Ardahan Üniversitesi
+Artvin: Artvin Çoruh Üniversitesi
+Aydın: Adnan Menderes Üniversitesi
+Balıkesir: Balıkesir Üniversitesi
+Bartın: Bartın Üniversitesi
+Batman: Batman Üniversitesi
+Bayburt: Bayburt Üniversitesi
+Bilecik: Bilecik Şeyh Edebali Üniversitesi
+Bingöl: Bingöl Üniversitesi
+Bitlis: Bitlis Eren Üniversitesi
+Bolu: Bolu Abant İzzet Baysal Üniversitesi
+Burdur: Mehmet Akif Ersoy Üniversitesi
+Bursa: Uludağ Üniversitesi, Bursa Teknik Üniversitesi
+Çanakkale: Çanakkale Onsekiz Mart Üniversitesi
+Çankırı: Çankırı Karatekin Üniversitesi
+Denizli: Pamukkale Üniversitesi
+Diyarbakır: Dicle Üniversitesi
+Düzce: Düzce Üniversitesi
+Edirne: Trakya Üniversitesi
+Elazığ: Fırat Üniversitesi
+Erzincan: Erzincan Binali Yıldırım Üniversitesi
+Erzurum: Atatürk Üniversitesi, Erzurum Teknik Üniversitesi
+Eskişehir: Anadolu Üniversitesi, Eskişehir Osmangazi Üniversitesi, Eskişehir Teknik Üniversitesi
+Gaziantep: Gaziantep Üniversitesi, Hasan Kalyoncu Üniversitesi, SANKO Üniversitesi
+Giresun: Giresun Üniversitesi
+Gümüşhane: Gümüşhane Üniversitesi
+Hakkâri: Hakkâri Üniversitesi
+Hatay: Hatay Mustafa Kemal Üniversitesi, İskenderun Teknik Üniversitesi
+Iğdır: Iğdır Üniversitesi
+Isparta: Isparta Uygulamalı Bilimler Üniversitesi, Süleyman Demirel Üniversitesi
+İstanbul: Boğaziçi Üniversitesi, İstanbul Teknik Üniversitesi, İstanbul Üniversitesi, Marmara Üniversitesi, Yıldız Teknik Üniversitesi, İstanbul Bilgi Üniversitesi, İstanbul Medeniyet Üniversitesi, İstanbul Şehir Üniversitesi, Koç Üniversitesi, Sabancı Üniversitesi, Bahçeşehir Üniversitesi, Beykent Üniversitesi
+İzmir: Ege Üniversitesi, Dokuz Eylül Üniversitesi, İzmir Ekonomi Üniversitesi, İzmir Yüksek Teknoloji Enstitüsü
+Kahramanmaraş: Kahramanmaraş Sütçü İmam Üniversitesi
+Karabük: Karabük Üniversitesi
+Karaman: Karamanoğlu Mehmetbey Üniversitesi
+Kars: Kafkas Üniversitesi
+Kastamonu: Kastamonu Üniversitesi
+Kayseri: Erciyes Üniversitesi, Abdullah Gül Üniversitesi, Nuh Naci Yazgan Üniversitesi
+Kırıkkale: Kırıkkale Üniversitesi
+Kırklareli: Kırklareli Üniversitesi
+Kırşehir: Kırşehir Ahi Evran Üniversitesi
+Kocaeli: Kocaeli Üniversitesi, Gebze Teknik Üniversitesi
+Konya: Selçuk Üniversitesi, Necmettin Erbakan Üniversitesi, Konya Teknik Üniversitesi
+Kütahya: Kütahya Dumlupınar Üniversitesi, Kütahya Sağlık Bilimleri Üniversitesi
+Malatya: İnönü Üniversitesi, Malatya Turgut Özal Üniversitesi
+Manisa: Manisa Celal Bayar Üniversitesi
+Mardin: Mardin Artuklu Üniversitesi
+Mersin: Mersin Üniversitesi, Tarsus Üniversitesi
+Muğla: Muğla Sıtkı Koçman Üniversitesi
+Muş: Muş Alparslan Üniversitesi
+Nevşehir: Nevşehir Hacı Bektaş Veli Üniversitesi
+Niğde: Niğde Ömer Halisdemir Üniversitesi
+Ordu: Ordu Üniversitesi
+Osmaniye: Osmaniye Korkut Ata Üniversitesi
+Rize: Recep Tayyip Erdoğan Üniversitesi
+Sakarya: Sakarya Üniversitesi, Sakarya Uygulamalı Bilimler Üniversitesi
+Samsun: Ondokuz Mayıs Üniversitesi, Samsun Üniversitesi
+Siirt: Siirt Üniversitesi
+Sinop: Sinop Üniversitesi
+Sivas: Cumhuriyet Üniversitesi, Sivas Bilim ve Teknoloji Üniversitesi
+Şanlıurfa: Harran Üniversitesi
+Şırnak: Şırnak Üniversitesi
+Tekirdağ: Namık Kemal Üniversitesi, Tekirdağ Namık Kemal Üniversitesi
+Tokat: Tokat Gaziosmanpaşa Üniversitesi
+Trabzon: Karadeniz Teknik Üniversitesi, Trabzon Üniversitesi
+Tunceli: Munzur Üniversitesi
+Uşak: Uşak Üniversitesi
+Van: Van Yüzüncü Yıl Üniversitesi
+Yalova: Yalova Üniversitesi
+Yozgat: Bozok Üniversitesi
+Zonguldak: Zonguldak Bülent Ecevit Üniversitesi

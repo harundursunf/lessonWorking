@@ -36,6 +36,10 @@ const GunlukSoz = () => {
         }
     };
 
+    const favoriSozSil = (index) => {
+        setFavoriler(favoriler.filter((_, i) => i !== index));
+    };
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
             <div className="mt-32 relative w-full max-w-[1163px] rounded-3xl shadow-lg bg-gradient-to-r from-orange-400 to-orange-600 overflow-hidden">
@@ -74,9 +78,16 @@ const GunlukSoz = () => {
 
                     <div className="mt-8">
                         <h2 className="text-2xl font-bold text-center mb-4">Favori Sözler</h2>
-                        <ul className="list-disc list-inside">
+                        <ul className="space-y-4 max-h-[300px] overflow-auto">
                             {favoriler.map((soz, index) => (
-                                <li key={index} className="text-gray-800">{soz}</li>
+                                <li key={index} className="flex justify-between items-center bg-white bg-opacity-80 shadow-xl rounded-lg p-4 max-w-lg mx-auto text-center">
+                                    <span className="text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap">{soz}</span>
+                                    <button
+                                        onClick={() => favoriSozSil(index)}
+                                        className="bg-red-500 text-white px-4 py-2 rounded-md shadow-lg hover:bg-red-600 transition">
+                                        Sil
+                                    </button>
+                                </li>
                             ))}
                         </ul>
                     </div>

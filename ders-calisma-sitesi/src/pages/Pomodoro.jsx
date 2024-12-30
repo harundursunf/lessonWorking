@@ -37,7 +37,7 @@ const Pomodoro = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4 -mt-16    ">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4 -mt-32    ">
 
             <div className="mt-5 relative w-full max-w-[1163px] rounded-3xl shadow-lg bg-gradient-to-r from-blue-500 to-blue-800 overflow-hidden">
                 {/* Dalgalı Arka Plan */}

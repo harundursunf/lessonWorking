@@ -107,7 +107,7 @@ const Header = () => {
             <IoIosMail className="text-3xl text-white ml-3" />
             <span className="text-base font-medium">@examplemail.com</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div  className="flex items-center gap-4 mr-9">
             <span>Şok Şok Fiyat: 99₺</span>
         </div>
     </div>
