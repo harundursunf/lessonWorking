@@ -1,96 +1,141 @@
-    import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-    const Uni = () => {
-        const [cities, setCities] = useState([]);
-        const [selectedCity, setSelectedCity] = useState('');
-        const [universities, setUniversities] = useState([]);
-        const [selectedUni, setSelectedUni] = useState('');
+const Uni = () => {
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState('');
+  const [universities, setUniversities] = useState([]);
+  const [selectedUni, setSelectedUni] = useState('');
+  const [selectedUniImage, setSelectedUniImage] = useState('');
 
-        // Şehir ve üniversite verilerini almak için txt dosyasını oku
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/cities.txt');
-                const text = await response.text();
+  // Şehir ve üniversite verilerini çekme
+  const fetchData = async () => {
+    try {
+      const response = await fetch('/cities.txt');
+      const text = await response.text();
+      const cityData = text.split('\n').map((line) => {
+        const [city, unis] = line.split(':');
+        const universities = unis
+          ? unis.split(';').map((u) => {
+              const [uniName, uniImage] = u.split(',');
+              return { name: uniName.trim(), image: uniImage?.trim() || '' };
+            })
+          : [];
+        return { city: city.trim(), universities };
+      });
+      setCities(cityData);
+    } catch (error) {
+      console.error('Veriler alınırken bir hata oluştu:', error);
+    }
+  };
 
-                // Veriyi işle
-                const cityData = text.split('\n').map((line) => {
-                    const [city, uniString] = line.split(':');
-                    const universities = uniString ? uniString.split(',') : [];
-                    return { city: city.trim(), universities: universities.map((u) => u.trim()) };
-                });
+  // Şehir verilerini yükle
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-                setCities(cityData);
-            } catch (error) {
-                console.error('Veriler alınırken bir hata oluştu:', error);
-            }
-        };
+  // Seçilen şehre göre üniversiteleri filtrele
+  useEffect(() => {
+    if (selectedCity) {
+      const cityInfo = cities.find((c) => c.city === selectedCity);
+      setUniversities(cityInfo ? cityInfo.universities : []);
+    } else {
+      setUniversities([]);
+    }
+  }, [selectedCity, cities]);
 
-        useEffect(() => {
-            fetchData();
-        }, []);
+  // Üniversite seçimi yapıldığında çalışır
+  const handleSelectUni = (uni) => {
+    setSelectedUni(uni.name);
+    setSelectedUniImage(uni.image);
+  };
 
-        // Şehir seçildiğinde üniversiteleri ayarla
-        useEffect(() => {
-            if (selectedCity) {
-                const cityInfo = cities.find((c) => c.city === selectedCity);
-                setUniversities(cityInfo ? cityInfo.universities : []);
-            } else {
-                setUniversities([]);
-            }
-        }, [selectedCity, cities]);
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-100 to-blue-50 p-4">
+      {/* Şehir Seçim Bölümü */}
+      <div className="bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex items-center space-x-8">
+        <div className="w-1/2">
+          <h2 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-yellow-600">
+            Şehrinizi Seçin ve Üniversitenizi Bulun!
+          </h2>
+          <select
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.target.value)}
+            className="mt-6 w-full border-2 border-green-300 rounded-lg p-3 text-lg bg-green-50 shadow-md"
+          >
+            <option value="">Şehir Seçin</option>
+            {cities.map((city) => (
+              <option key={city.city} value={city.city}>
+                {city.city}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="w-1/2 flex flex-col items-center justify-center">
+          <img
+            src="/public/selection-image.png"
+            alt="Şehir Seçim"
+            className="rounded-lg w-[300px] h-[300px] object-cover"
+          />
+        </div>
+      </div>
 
-        return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
-                {/* Şehir Seçimi */}
-                <div className="w-full max-w-lg p-6 bg-white shadow-md rounded-lg">
-                    <h2 className="text-2xl font-bold text-center mb-4">Şehrinizi Seçin</h2>
-                    <select
-                        value={selectedCity}
-                        onChange={(e) => setSelectedCity(e.target.value)}
-                        className="w-full border border-gray-300 rounded-lg p-3"
-                    >
-                        <option value="">Şehir Seçin</option>
-                        {cities.map((city) => (
-                            <option key={city.city} value={city.city}>
-                                {city.city}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+      {/* Üniversite Listesi Bölümü */}
+      <div className="bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] mt-8 flex flex-col items-center">
+        <h3 className="text-2xl font-bold text-center text-gray-700">Üniversiteler</h3>
+        {universities.length > 0 ? (
+          <div className="w-full flex flex-wrap justify-center gap-4 mt-6">
+            {universities.map((uni, index) => (
+              <div
+                key={index}
+                className="p-4 bg-gradient-to-r from-green-200 to-blue-200 rounded-lg shadow-lg hover:scale-105 transform transition duration-300"
+              >
+                <h4 className="text-lg font-bold">{uni.name}</h4>
+                <button
+                  onClick={() => handleSelectUni(uni)}
+                  className="mt-3 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
+                >
+                  Seç
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-500 mt-4">Üniversite bulunamadı.</p>
+        )}
+      </div>
 
-                {/* Üniversiteler */}
-                <div className="w-full max-w-lg mt-6 bg-white shadow-md rounded-lg p-6">
-                    <h3 className="text-xl font-semibold mb-4">Üniversiteler</h3>
-                    {universities.length > 0 ? (
-                        universities.map((uni, index) => (
-                            <div
-                                key={index}
-                                className="p-3 bg-gray-100 rounded-md shadow-sm mb-2 flex justify-between items-center"
-                            >
-                                <span>{uni}</span>
-                                <button
-                                    onClick={() => setSelectedUni(uni)}
-                                    className="bg-blue-500 text-white px-3 py-1 rounded-md"
-                                >
-                                    Seç
-                                </button>
-                            </div>
-                        ))
-                    ) : (
-                        <p className="text-gray-500">Üniversite bulunamadı.</p>
-                    )}
-                </div>
+      {/* Seçilen Üniversite Bölümü */}
+      {selectedUni && (
+        <div
+          id="target-section"
+          className="bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex items-center space-x-8 mt-8"
+          style={{ height: '420px' }}
+        >
+          <div className="w-1/2">
+            <h2 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-yellow-600">
+              {selectedUni}
+            </h2>
+            {selectedUniImage ? (
+              <p className="mt-6 text-lg text-gray-800 max-w-lg mx-auto bg-gradient-to-r from-green-50 to-white p-6 rounded-lg shadow-md border border-green-100">
+                Bu üniversite hakkında daha fazla bilgi için aşağıdaki resmi inceleyin!
+              </p>
+            ) : (
+              <p className="mt-6 text-gray-500">Resim bulunamadı.</p>
+            )}
+          </div>
+          <div className="w-1/2 flex flex-col items-center justify-center">
+            {selectedUniImage && (
+              <img
+                src={selectedUniImage}
+                alt={selectedUni}
+                className="rounded-lg w-[350px] h-[350px] object-cover"
+              />
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
-                {/* Seçili Üniversite */}
-                {selectedUni && (
-                    <div className="w-full max-w-lg mt-6 bg-white shadow-md rounded-lg p-6 text-center">
-                        <h2 className="text-xl font-bold text-green-600 uppercase">
-                            Seçili Üniversite: {selectedUni}
-                        </h2>
-                    </div>
-                )}
-            </div>
-        );
-    };
-
-    export default Uni;
+export default Uni;
