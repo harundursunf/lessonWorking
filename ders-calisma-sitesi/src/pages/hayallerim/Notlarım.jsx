@@ -8,6 +8,7 @@ const Notlarım = () => {
     const [tag, setTag] = useState('');
     const [tags, setTags] = useState([]);
     const [themeColor, setThemeColor] = useState('green');
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleAddNote = () => {
         if (note.trim()) {
@@ -48,7 +49,14 @@ const Notlarım = () => {
         }
     };
 
-    
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const filteredNotes = notes.filter(note =>
+        note.text.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div className="mt-[150px] bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex flex-col items-center space-y-8 mt-8 mx-auto">
             <div className="w-full flex flex-col items-center space-y-4">
@@ -98,7 +106,17 @@ const Notlarım = () => {
                         Not Ekle
                     </button>
                 </div>
+                <div>
 
+                    <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        placeholder="Notları ara..."
+                        className="w-full p-4 rounded-lg border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                    />
+
+                </div>
 
             </div>
 
@@ -114,11 +132,11 @@ const Notlarım = () => {
 
             <div className="w-full max-h-[350px] overflow-y-auto bg-gray-100 p-4 rounded-lg shadow-md">
                 {!isStickyView ? (
-                    notes.length > 0 ? (
-                        notes.map((note, index) => (
+                    filteredNotes.length > 0 ? (
+                        filteredNotes.map((note, index) => (
                             <div
                                 key={index}
-                                className={`${getPriorityColor(note.priority)} p-4 mb-4 rounded-lg shadow-md flex justify-between items-center border`}
+                                className={`p-4 mb-4 rounded-lg shadow-md flex justify-between items-center border ${getPriorityColor(note.priority)}`}
                             >
                                 <div>
                                     <span className="text-gray-800">{note.text}</span>
@@ -139,10 +157,9 @@ const Notlarım = () => {
                                 <div>
                                     <button
                                         onClick={() => handleToggleFavorite(index)}
-                                        className={`${note.isFavorite ? 'text-yellow-500' : 'text-gray-500'
-                                            } font-bold py-1 px-3 rounded-full`}
+                                        className={`font-bold py-1 px-3 rounded-full ${note.isFavorite ? 'text-yellow-500' : 'text-gray-500'}`}
                                     >
-                                        {note.isFavorite ? 'Favori' : 'Favoriye Ekle'}
+                                        {note.isFavorite ? '⭐' : 'Favoriye Ekle'}
                                     </button>
                                     <button
                                         onClick={() => handleDeleteNote(index)}
@@ -158,10 +175,10 @@ const Notlarım = () => {
                     )
                 ) : (
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                        {notes.map((note, index) => (
+                        {filteredNotes.map((note, index) => (
                             <div
                                 key={index}
-                                className={`${getPriorityColor(note.priority)} p-4 rounded-lg shadow-md border flex flex-col justify-between`}
+                                className={`p-4 rounded-lg shadow-md border flex flex-col justify-between ${getPriorityColor(note.priority)}`}
                             >
                                 <div>
                                     <span className="text-gray-800 text-sm">{note.text}</span>
@@ -182,10 +199,9 @@ const Notlarım = () => {
                                 <div>
                                     <button
                                         onClick={() => handleToggleFavorite(index)}
-                                        className={`${note.isFavorite ? 'text-yellow-500' : 'text-gray-500'
-                                            } font-bold py-1 px-3 rounded-full`}
+                                        className={`font-bold py-1 px-3 rounded-full ${note.isFavorite ? 'text-yellow-500' : 'text-gray-500'}`}
                                     >
-                                        {note.isFavorite ? 'Favori' : 'Favoriye Ekle'}
+                                        {note.isFavorite ? '⭐' : 'Favoriye Ekle'}
                                     </button>
                                     <button
                                         onClick={() => handleDeleteNote(index)}
