@@ -98,20 +98,20 @@ const Header = () => {
         <header className="fixed top-0 left-0 right-0 z-50 ">
             {/* Üst Bilgi */}
             <div className="bg-red-700 text-white w-full">
-    <div className="flex items-center justify-between px-6 h-[31px] text-sm max-w-screen-xl mx-auto">
-        <div className="flex items-center gap-1 ml-10">
-            <div className="flex items-center gap-1">
-                <FaPhoneAlt className="text-xl text-white" />
-                <span className="text-base font-medium">+90 555 555 55 55</span>
+                <div className="flex items-center justify-between px-6 h-[31px] text-sm max-w-screen-xl mx-auto">
+                    <div className="flex items-center gap-1 ml-10">
+                        <div className="flex items-center gap-1">
+                            <FaPhoneAlt className="text-xl text-white" />
+                            <span className="text-base font-medium">+90 555 555 55 55</span>
+                        </div>
+                        <IoIosMail className="text-3xl text-white ml-3" />
+                        <span className="text-base font-medium">@examplemail.com</span>
+                    </div>
+                    <div className="flex items-center gap-4 mr-9">
+                        <span>Şok Şok Fiyat: 99₺</span>
+                    </div>
+                </div>
             </div>
-            <IoIosMail className="text-3xl text-white ml-3" />
-            <span className="text-base font-medium">@examplemail.com</span>
-        </div>
-        <div  className="flex items-center gap-4 mr-9">
-            <span>Şok Şok Fiyat: 99₺</span>
-        </div>
-    </div>
-</div>
 
 
             {/* Ana Menü */}
@@ -252,9 +252,14 @@ const Header = () => {
                                             <Link to="/hayallerim/uni" className="px-4 py-2 hover:bg-gray-100 block">
                                                 Üniversiteler
                                             </Link>
+                                        </li> <li>
+                                            <Link to="/hayallerim/notlarım" className="px-4 py-2 hover:bg-gray-100 block">
+                                                Notlarım
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
+
                             )}
                         </div>
                     </nav>
