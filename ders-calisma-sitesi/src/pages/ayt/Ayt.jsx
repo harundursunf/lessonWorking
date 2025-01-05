@@ -46,42 +46,43 @@ export default function AytKonular() {
     };
 
     return (
-        <div className="mt-[100px] min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+        <div className="mt-[100px] min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-gray-200 p-4">
             {/* İlerleme Gösterimi */}
             <div className="flex flex-col items-center mb-8">
                 <div
-                    className="w-32 h-32 rounded-full flex items-center justify-center text-white font-bold text-xl"
+                    className="relative w-32 h-32 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg"
                     style={{
                         background: `conic-gradient(#4caf50 ${progress}%, #e0e0e0 0%)`,
                     }}>
-                    %{progress}
+                    <span className="z-10">%{progress}</span>
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 to-green-700 blur-sm"></div>
                 </div>
-                <p className="text-gray-700 mt-4">Tüm konuların %{progress} tamamlandı!</p>
+                <p className="text-gray-700 mt-4 text-lg font-semibold">Tüm konuların %{progress} tamamlandı!</p>
 
                 {/* Yatay İlerleme Çubuğu */}
-                <div className="w-full max-w-[300px] bg-gray-300 h-4 rounded-full mt-4">
+                <div className="relative w-full max-w-[300px] bg-gray-300 h-4 rounded-full mt-4 overflow-hidden shadow-inner">
                     <div
-                        className="bg-green-500 h-4 rounded-full"
+                        className="absolute top-0 left-0 bg-gradient-to-r from-green-500 to-green-700 h-full rounded-full"
                         style={{ width: `${progress}%` }}
                     ></div>
                 </div>
             </div>
 
             {/* Konu Listesi */}
-            <div className="relative w-full max-w-[1163px] rounded-3xl shadow-lg bg-gradient-to-r from-green-500 to-green-800 overflow-hidden">
-                <div className="absolute inset-0 -z-10 bg-no-repeat bg-cover bg-center" style={{
-                    backgroundImage: 'url(https://source.unsplash.com/random/1920x1080?science)'
+            <div className="relative w-full max-w-[1163px] rounded-3xl shadow-xl bg-gradient-to-br from-green-500 via-green-600 to-green-800 overflow-hidden">
+                <div className="absolute inset-0 -z-10 bg-no-repeat bg-cover bg-center opacity-20" style={{
+                    backgroundImage: 'url(https://source.unsplash.com/random/1920x1080?science)',
                 }}></div>
 
                 <div className="p-8">
-                    <h1 className="text-white text-4xl font-bold text-center mb-4">AYT Tüm Konular</h1>
-                    <p className="text-white text-lg text-center leading-relaxed mb-8">
+                    <h1 className="text-white text-4xl font-extrabold text-center mb-4 drop-shadow-lg">AYT Tüm Konular</h1>
+                    <p className="text-white text-lg text-center leading-relaxed mb-8 drop-shadow-md">
                         AYT kapsamındaki tüm ders konularını bu sayfada inceleyebilirsiniz.
                     </p>
 
                     {Object.entries(topics).map(([category, topicList], categoryIndex) => (
-                        <div key={categoryIndex} className="bg-white bg-opacity-10 p-4 rounded-lg mb-4">
-                            <h2 className="text-white text-2xl font-semibold mb-2">{category}</h2>
+                        <div key={categoryIndex} className="bg-white bg-opacity-10 p-4 rounded-lg mb-4 shadow-md">
+                            <h2 className="text-white text-2xl font-semibold mb-2 drop-shadow-sm">{category}</h2>
                             <ul className="list-none flex flex-wrap gap-4">
                                 {topicList.map((topic, index) => (
                                     <li key={index} className="flex items-center gap-2 text-white">
@@ -89,9 +90,11 @@ export default function AytKonular() {
                                             type="checkbox"
                                             checked={completedTopics[category][index]}
                                             onChange={() => toggleTopic(category, index)}
-                                            className="w-5 h-5 cursor-pointer accent-green-500"
+                                            className="w-5 h-5 cursor-pointer accent-green-500 shadow-inner"
                                         />
-                                        <span className={completedTopics[category][index] ? "line-through" : ""}>
+                                        <span
+                                            className={`${completedTopics[category][index] ? "line-through" : ""} transition-all duration-300`}
+                                        >
                                             {topic}
                                         </span>
                                     </li>
@@ -106,11 +109,10 @@ export default function AytKonular() {
             <div className="mt-8">
                 <button
                     onClick={handleSave}
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    className="bg-gradient-to-r from-green-500 to-green-700 hover:from-green-700 hover:to-green-900 text-white font-bold py-2 px-6 rounded-full shadow-lg transition-all duration-300">
                     Kaydet
                 </button>
             </div>
         </div>
     );
 }
-    
