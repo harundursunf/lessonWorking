@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import Home from './pages/Home';
-import ScoreCalculator from './pages/ScoreCalculator';
+
 import Pomodoro from './pages/Pomodoro';
 import Personal from './pages/Personal';
-import TestAndSolution from './pages/TestAndSolution';
+
 import GunlukSoz from './pages/GunlukSoz';
 import Tyt from './pages/tyt/Tyt';
 import TytMat from './pages/tyt/TytMat';
@@ -34,14 +34,7 @@ const App = () => {
             </MainLayout>
           }
         />
-        <Route
-          path="/score-calculator"
-          element={
-            <MainLayout>
-              <ScoreCalculator />
-            </MainLayout>
-          }
-        />
+
         <Route
           path="/pomodoro"
           element={
@@ -58,14 +51,7 @@ const App = () => {
             </MainLayout>
           }
         />
-        <Route
-          path="/test"
-          element={
-            <MainLayout>
-              <TestAndSolution />
-            </MainLayout>
-          }
-        />
+
         <Route
           path="/gunlukSoz"
           element={

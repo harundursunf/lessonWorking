@@ -41,55 +41,52 @@ const GunlukSoz = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
-            <div className="mt-32 relative w-full max-w-[1163px] rounded-3xl shadow-lg bg-gradient-to-r from-orange-400 to-orange-600 overflow-hidden">
-                {/* Dalgalı Arka Plan */}
-                <div className="absolute inset-0 -z-10 bg-no-repeat bg-cover bg-center opacity-30" style={{
-                    backgroundImage: 'url(https://source.unsplash.com/random/1920x1080?inspiration)',
-                }}></div>
-
-                <div className="p-8">
-                    <h1 className="text-white text-4xl font-bold text-center mb-4">
-                        Günün Sözü
-                    </h1>
-
-                    {loading ? (
-                        <div className="bg-white bg-opacity-80 shadow-xl rounded-lg p-6 max-w-lg mx-auto text-center">
-                            <p className="text-xl italic text-gray-800">Sözler yükleniyor...</p>
-                        </div>
-                    ) : (
-                        <div className="bg-white bg-opacity-80 shadow-xl rounded-lg p-6 max-w-lg mx-auto text-center">
-                            <p className="text-xl italic text-gray-800">{guncelSoz || "Söz yok"}</p>
-                        </div>
-                    )}
-
-                    <div className="flex justify-center mt-8 space-x-4">
-                        <button
-                            onClick={rastgeleSozSec}
-                            className="bg-yellow-500 text-white px-6 py-3 rounded-md shadow-lg hover:bg-yellow-600 transition">
-                            Değiştir
-                        </button>
-                        <button
-                            onClick={favoriSozEkle}
-                            className="bg-blue-500 text-white px-6 py-3 rounded-md shadow-lg hover:bg-blue-600 transition">
-                            Favorilere Ekle
-                        </button>
-                    </div>
-
-                    <div className="mt-8">
-                        <h2 className="text-2xl font-bold text-center mb-4">Favori Sözler</h2>
-                        <ul className="space-y-4 max-h-[300px] overflow-auto">
-                            {favoriler.map((soz, index) => (
-                                <li key={index} className="flex justify-between items-center bg-white bg-opacity-80 shadow-xl rounded-lg p-4 max-w-lg mx-auto text-center">
+        <div className="mt-[150px] bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex flex-col items-center space-y-8 mt-8 mx-auto">
+            <div className="w-full flex flex-col items-center space-y-4">
+                <h2 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-yellow-600">
+                    Günün Sözü!
+                </h2>
+                <p className="mt-2 text-lg text-gray-800 max-w-lg mx-auto bg-gradient-to-r from-green-50 to-white p-6 rounded-lg shadow-md border border-green-100">
+                    🌟 Her gün yeni bir ilham kaynağı!
+                </p>
+                <div className="text-xl italic text-gray-800 mb-8 text-center">
+                    {loading ? "Sözler yükleniyor..." : guncelSoz || "Söz yok"}
+                </div>
+                <div className="flex justify-center space-x-4">
+                    <button
+                        onClick={rastgeleSozSec}
+                        className="bg-[#00BFFF] hover:bg-[#0099CC] text-white font-bold py-2 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+                    >
+                        Değiştir
+                    </button>
+                    <button
+                        onClick={favoriSozEkle}
+                        className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+                    >
+                        Favorilere Ekle
+                    </button>
+                </div>
+                <div className="w-full flex flex-col space-y-4 mt-8">
+                    <h3 className="text-lg font-bold text-gray-700">Favori Sözleriniz</h3>
+                    <div className="w-full max-h-[350px] overflow-y-auto bg-gray-100 p-4 rounded-lg shadow-md">
+                        {favoriler.length > 0 ? (
+                            favoriler.map((soz, index) => (
+                                <div
+                                    key={index}
+                                    className="p-4 mb-4 rounded-lg shadow-md flex justify-between items-center border bg-white"
+                                >
                                     <span className="text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap">{soz}</span>
                                     <button
                                         onClick={() => favoriSozSil(index)}
-                                        className="bg-red-500 text-white px-4 py-2 rounded-md shadow-lg hover:bg-red-600 transition">
+                                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md shadow-lg transition-transform transform hover:scale-105"
+                                    >
                                         Sil
                                     </button>
-                                </li>
-                            ))}
-                        </ul>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-gray-500 text-center">Henüz bir favori söz eklenmedi.</p>
+                        )}
                     </div>
                 </div>
             </div>

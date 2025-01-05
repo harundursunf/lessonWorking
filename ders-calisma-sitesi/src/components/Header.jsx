@@ -137,11 +137,7 @@ const Header = () => {
                             {isMenu1Open && (
                                 <div className="absolute right-0 mt-[1px] w-48 bg-white text-gray-800 shadow-md rounded z-50">
                                     <ul>
-                                        <li>
-                                            <Link to="/score-calculator" className="px-4 py-2 hover:bg-gray-100 block">
-                                                Puan Hesaplama
-                                            </Link>
-                                        </li>
+
                                         <li>
                                             <Link to="/pomodoro" className="px-4 py-2 hover:bg-gray-100 block">
                                                 Pomodoro
@@ -152,11 +148,7 @@ const Header = () => {
                                                 Sözler
                                             </Link>
                                         </li>
-                                        <li>
-                                            <Link to="/test" className="px-4 py-2 hover:bg-gray-100 block">
-                                                Testler
-                                            </Link>
-                                        </li>
+
                                         <li>
                                             <Link to="/personal" className="px-4 py-2 hover:bg-gray-100 block">
                                                 Günlük Hedefler

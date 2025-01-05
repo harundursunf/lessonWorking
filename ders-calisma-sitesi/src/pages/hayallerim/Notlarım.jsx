@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 
 const Notlarım = () => {
-    const [notes, setNotes] = useState([]);
-    const [note, setNote] = useState('');
-    const [priority, setPriority] = useState('Düşük');
-    const [isStickyView, setIsStickyView] = useState(false);
-    const [tag, setTag] = useState('');
-    const [tags, setTags] = useState([]);
-    const [themeColor, setThemeColor] = useState('green');
-    const [searchTerm, setSearchTerm] = useState('');
+    const [notes, setNotes] = useState([]); // Notlar için state
+    const [note, setNote] = useState(''); // Yeni not inputu
+    const [priority, setPriority] = useState('Düşük'); // Öncelik state
+    const [isStickyView, setIsStickyView] = useState(false); // Görünüm state'i
+    const [tag, setTag] = useState(''); // Etiket inputu
+    const [tags, setTags] = useState([]); // Etiketler için state
+    const [themeColor, setThemeColor] = useState('green'); // Tema state'i
+    const [searchTerm, setSearchTerm] = useState(''); // Arama inputu
+    const [filterTag, setFilterTag] = useState(''); // Etiketlere göre filtreleme
 
     const handleAddNote = () => {
         if (note.trim()) {
@@ -53,8 +54,13 @@ const Notlarım = () => {
         setSearchTerm(e.target.value);
     };
 
+    const handleFilterByTag = (tag) => {
+        setFilterTag(tag);
+    };
+
     const filteredNotes = notes.filter(note =>
-        note.text.toLowerCase().includes(searchTerm.toLowerCase())
+        note.text.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (filterTag ? note.tags.includes(filterTag) : true)
     );
 
     return (
@@ -106,28 +112,40 @@ const Notlarım = () => {
                         Not Ekle
                     </button>
                 </div>
-                <div>
-
+                <div className="mt-4 w-full max-w-md">
                     <input
                         type="text"
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={handleSearchChange}
                         placeholder="Notları ara..."
                         className="w-full p-4 rounded-lg border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-500"
                     />
-
+                    <div className="mt-2">
+                        <label className="block text-sm font-medium text-gray-700">Etiket Filtrele</label>
+                        <select
+                            value={filterTag}
+                            onChange={(e) => handleFilterByTag(e.target.value)}
+                            className="w-full p-2 mt-1 rounded-lg border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        >
+                            <option value="">Tüm Etiketler</option>
+                            {Array.from(new Set(notes.flatMap(note => note.tags))).map((tag, index) => (
+                                <option key={index} value={tag}>
+                                    {tag}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
 
-            </div>
-
-            <div className="w-full flex justify-between items-center">
-                <h3 className="text-lg font-bold text-gray-700">Notlarınız</h3>
-                <button
-                    onClick={() => setIsStickyView(!isStickyView)}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
-                >
-                    Görünümü Değiştir
-                </button>
+                <div className="w-full flex justify-between items-center">
+                    <h3 className="text-lg font-bold text-gray-700">Notlarınız</h3>
+                    <button
+                        onClick={() => setIsStickyView(!isStickyView)}
+                        className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+                    >
+                        Görünümü Değiştir
+                    </button>
+                </div>
             </div>
 
             <div className="w-full max-h-[350px] overflow-y-auto bg-gray-100 p-4 rounded-lg shadow-md">
@@ -205,7 +223,7 @@ const Notlarım = () => {
                                     </button>
                                     <button
                                         onClick={() => handleDeleteNote(index)}
-                                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-full shadow-lg mt-2 self-end"
+                                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-full shadow-lg ml-2"
                                     >
                                         Sil
                                     </button>
