@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const Personal = () => {
-    const [goals, setGoals] = useState([]); // Hedefler için ayrı state
-    const [newGoal, setNewGoal] = useState(''); // Yeni hedef inputu
+    const [goals, setGoals] = useState([]);
+    const [newGoal, setNewGoal] = useState('');
+    const [completionRate, setCompletionRate] = useState(0);
+
+    // Hedef tamamlama oranını hesaplama
+    useEffect(() => {
+        const completedGoals = goals.filter((goal) => goal.completed).length;
+        const totalGoals = goals.length;
+        const rate = totalGoals > 0 ? (completedGoals / totalGoals) * 100 : 0;
+        setCompletionRate(rate);
+    }, [goals]);
 
     // Hedef ekleme işlevi
     const addGoal = () => {
@@ -18,7 +29,21 @@ const Personal = () => {
     };
 
     return (
-        <div className="mt-[150px] bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex flex-col items-center space-y-8 mt-8 mx-auto">
+        <div className="relative bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex flex-col items-center space-y-8 mx-auto">
+            {/* Sağ Alt Köşede Sabit İlerleme Çarkı */}
+            <div className="fixed bottom-4 right-4 w-[110px] h-[110px] bg-white rounded-full shadow-lg p-2 z-50">
+                <CircularProgressbar
+                    value={completionRate}
+                    text={`${Math.round(completionRate)}%`}
+                    styles={buildStyles({
+                        textColor: "#4CAF50",
+                        pathColor: completionRate === 100 ? "#4CAF50" : "#00BFFF",
+                        trailColor: "#f0f0f0",
+                        textSize: "30px",
+                    })}
+                />
+            </div>
+
             <div className="w-full flex flex-col items-center space-y-4">
                 <h2 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-yellow-600">
                     Hedeflerinizi Belirleyin!

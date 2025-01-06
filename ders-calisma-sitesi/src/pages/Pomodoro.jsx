@@ -4,7 +4,9 @@ const Pomodoro = () => {
     const [timeLeft, setTimeLeft] = useState(0.1 * 60); // 25 dakika
     const [isRunning, setIsRunning] = useState(false);
     const [mode, setMode] = useState('work'); // 'work' veya 'break'
-    const [isSoundOn, setIsSoundOn] = useState(true); // Ses durumu
+    const [workMinutes, setWorkMinutes] = useState(0);
+    const [breakCount, setBreakCount] = useState(0);
+    const [isSoundOn, setIsSoundOn] = useState(true);
     const audioRef = React.useRef();
 
     useEffect(() => {
@@ -15,13 +17,20 @@ const Pomodoro = () => {
             }, 1000);
         } else if (timeLeft === 0) {
             setIsRunning(false);
-            setMode((prevMode) => (prevMode === 'work' ? 'break' : 'work'));
-            setTimeLeft(mode === 'work' ? 5 * 60 : 25 * 60); // Mola veya Çalışma zamanı için zaman döngüsü
+            if (mode === 'work') {
+                setMode('break');
+                setTimeLeft(5 * 60); // Mola süresi
+                setWorkMinutes((prev) => prev + 25); // Çalışma dakikalarını artır
+            } else {
+                setMode('work');
+                setTimeLeft(25 * 60); // Çalışma süresi
+                setBreakCount((prev) => prev + 1); // Mola sayısını artır
+            }
             if (isSoundOn) {
                 audioRef.current.play(); // Ses çal
             }
         }
-        return () => clearInterval(timer); // Temizle
+        return () => clearInterval(timer);
     }, [isRunning, timeLeft, mode, isSoundOn]);
 
     const toggleTimer = () => {
@@ -30,7 +39,7 @@ const Pomodoro = () => {
 
     const resetTimer = () => {
         setIsRunning(false);
-        setTimeLeft(mode === 'work' ? 25 * 60 : 5 * 60); // Başlangıç sürelerini resetler
+        setTimeLeft(mode === 'work' ? 25 * 60 : 5 * 60);
     };
 
     const formatTime = (seconds) => {
@@ -42,7 +51,7 @@ const Pomodoro = () => {
     };
 
     return (
-        <div className="mt-[150px] bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex flex-col items-center space-y-8 mt-8 mx-auto">
+        <div className="mt-[150px] bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex flex-col items-center space-y-8 mx-auto">
             <div className="w-full flex flex-col items-center space-y-4">
                 <h2 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-yellow-600">
                     Pomodoro Zamanlayıcı!
@@ -79,6 +88,35 @@ const Pomodoro = () => {
                     </label>
                 </div>
                 <audio ref={audioRef} src="/sounds/pulse-2.mp3" preload="auto" />
+            </div>
+
+            {/* Günlük Çalışma İstatistikleri */}
+            <div className="relative mt-8 bg-gray-100 p-6 rounded-lg shadow-md w-full max-w-lg">
+                <h3 className="text-xl font-bold text-gray-700 mb-4">
+                    Günlük Çalışma İstatistikleri
+                </h3>
+                <p className="text-lg text-gray-800">
+                    🕒 Toplam Çalışma Süresi: <strong>{workMinutes} dakika</strong>
+                </p>
+                <p className="text-lg text-gray-800">
+                    ☕ Molalar: <strong>{breakCount}</strong>
+                </p>
+                <div className="absolute top-5 right-5">
+                    <div className="group relative">
+                        <button className="text-gray-500 hover:text-gray-700">
+                            ❓
+                        </button>
+                        <div className="absolute top-full right-0 w-[250px] bg-white p-4 shadow-lg rounded-md border border-gray-300 text-sm text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p><strong>Bu sistem nasıl çalışıyor?</strong></p>
+                            <ul className="mt-2 list-disc pl-4">
+                                <li>25 dakikalık bir odaklanma süresiyle başlar.</li>
+                                <li>Odak süresi dolduğunda 5 dakikalık bir mola verir.</li>
+                                <li>Her moladan sonra döngü tekrar başlar.</li>
+                                <li>Zamanlayıcıyı durdurabilir, sıfırlayabilir veya yeniden başlatabilirsiniz.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

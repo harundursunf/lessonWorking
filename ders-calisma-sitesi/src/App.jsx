@@ -20,6 +20,7 @@ import Notlarım from './pages/Hayallerim/Notlarım'; // Uni sayfası buraya imp
 
 
 import './index.css';
+import Bilgiler from './pages/Bilgiler';
 
 const App = () => {
   return (
@@ -57,6 +58,14 @@ const App = () => {
           element={
             <MainLayout>
               <GunlukSoz />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/bilgiler"
+          element={
+            <MainLayout>
+              <Bilgiler />
             </MainLayout>
           }
         />

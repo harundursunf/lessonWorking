@@ -154,6 +154,12 @@ const Header = () => {
                                                 Günlük Hedefler
                                             </Link>
                                         </li>
+
+                                        <li>
+                                            <Link to="/Bilgiler" className="px-4 py-2 hover:bg-gray-100 block">
+                                                Günlük bilgiler
+                                            </Link>
+                                        </li>
                                     </ul>
                                 </div>
                             )}
