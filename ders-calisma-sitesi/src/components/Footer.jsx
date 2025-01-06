@@ -17,7 +17,7 @@ const Footer = () => {
                     Kullanım Şartları
                 </a>
                 <a href="/contact" className="text-gray-400 hover:text-white transition">
-                    İletişim
+                    İletisim
                 </a>
             </div>
             <div className="mt-6 text-xs text-gray-500">
