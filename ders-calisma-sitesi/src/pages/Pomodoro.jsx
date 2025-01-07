@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
 const Pomodoro = () => {
-    const [timeLeft, setTimeLeft] = useState(0.1 * 60); // 25 dakika
+    const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 dakika
     const [isRunning, setIsRunning] = useState(false);
     const [mode, setMode] = useState('work'); // 'work' veya 'break'
     const [workMinutes, setWorkMinutes] = useState(0);
     const [breakCount, setBreakCount] = useState(0);
-    const [isSoundOn, setIsSoundOn] = useState(true);
+    const [dailyGoal, setDailyGoal] = useState(localStorage.getItem('dailyGoal') || 1500); // Günlük hedefi local storage'dan al
+    const [goalProgress, setGoalProgress] = useState(0); // İlerleme oranı
     const audioRef = React.useRef();
 
     useEffect(() => {
+        const savedWorkMinutes = parseInt(localStorage.getItem('workMinutes'), 10) || 0;
+        const savedBreakCount = parseInt(localStorage.getItem('breakCount'), 10) || 0;
+        setWorkMinutes(savedWorkMinutes);
+        setBreakCount(savedBreakCount);
+
         let timer;
         if (isRunning && timeLeft > 0) {
             timer = setInterval(() => {
@@ -21,17 +27,17 @@ const Pomodoro = () => {
                 setMode('break');
                 setTimeLeft(5 * 60); // Mola süresi
                 setWorkMinutes((prev) => prev + 25); // Çalışma dakikalarını artır
+                setGoalProgress((prev) => prev + 25); // Hedef ilerlemesi
+                localStorage.setItem('workMinutes', workMinutes + 25); // Çalışma süresini kaydet
             } else {
                 setMode('work');
                 setTimeLeft(25 * 60); // Çalışma süresi
                 setBreakCount((prev) => prev + 1); // Mola sayısını artır
-            }
-            if (isSoundOn) {
-                audioRef.current.play(); // Ses çal
+                localStorage.setItem('breakCount', breakCount + 1); // Mola sayısını kaydet
             }
         }
         return () => clearInterval(timer);
-    }, [isRunning, timeLeft, mode, isSoundOn]);
+    }, [isRunning, timeLeft, mode, workMinutes, breakCount]);
 
     const toggleTimer = () => {
         setIsRunning(!isRunning);
@@ -48,6 +54,15 @@ const Pomodoro = () => {
         return `${minutes.toString().padStart(2, '0')}:${remainingSeconds
             .toString()
             .padStart(2, '0')}`;
+    };
+
+    // İlerleme çubuğu yüzdesi
+    const progressPercentage = (goalProgress / dailyGoal) * 100;
+
+    const handleGoalChange = (event) => {
+        const newGoal = parseInt(event.target.value, 10);
+        setDailyGoal(newGoal);
+        localStorage.setItem('dailyGoal', newGoal); // Hedefi kaydet
     };
 
     return (
@@ -76,18 +91,35 @@ const Pomodoro = () => {
                         Sıfırla
                     </button>
                 </div>
-                <div className="mt-4">
-                    <label className="flex items-center">
-                        <input
-                            type="checkbox"
-                            checked={isSoundOn}
-                            onChange={(e) => setIsSoundOn(e.target.checked)}
-                            className="mr-2"
-                        />
-                        Sesli Uyarılar
-                    </label>
+            </div>
+
+            {/* Günlük Hedef ve İlerleme Çubuğu */}
+            <div className="relative mt-8 bg-gray-100 p-6 rounded-lg shadow-md w-full max-w-lg">
+                <h3 className="text-xl font-bold text-gray-700 mb-4">
+                    Günlük Hedef ve İlerleme
+                </h3>
+                <p className="text-lg text-gray-800">
+                    🏁 Hedefiniz: <strong>{dailyGoal} dakika</strong>
+                </p>
+                <input
+                    type="number"
+                    value={dailyGoal}
+                    onChange={handleGoalChange}
+                    className="mt-2 p-2 border border-gray-300 rounded-lg"
+                    placeholder="Yeni Hedef"
+                />
+                <p className="text-lg text-gray-800">
+                    🚀 Günlük İlerleme: <strong>{goalProgress} dakika</strong>
+                </p>
+                <div className="w-full bg-gray-300 h-2 rounded-full">
+                    <div
+                        className="h-2 bg-green-500 rounded-full"
+                        style={{ width: `${progressPercentage}%` }}
+                    ></div>
                 </div>
-                <audio ref={audioRef} src="/sounds/pulse-2.mp3" preload="auto" />
+                {goalProgress >= dailyGoal && (
+                    <p className="mt-2 text-lg text-green-600 font-bold">Tebrikler! Hedefinizi başardınız!</p>
+                )}
             </div>
 
             {/* Günlük Çalışma İstatistikleri */}
@@ -101,22 +133,6 @@ const Pomodoro = () => {
                 <p className="text-lg text-gray-800">
                     ☕ Molalar: <strong>{breakCount}</strong>
                 </p>
-                <div className="absolute top-5 right-5">
-                    <div className="group relative">
-                        <button className="text-gray-500 hover:text-gray-700">
-                            ❓
-                        </button>
-                        <div className="absolute top-full right-0 w-[250px] bg-white p-4 shadow-lg rounded-md border border-gray-300 text-sm text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <p><strong>Bu sistem nasıl çalışıyor?</strong></p>
-                            <ul className="mt-2 list-disc pl-4">
-                                <li>25 dakikalık bir odaklanma süresiyle başlar.</li>
-                                <li>Odak süresi dolduğunda 5 dakikalık bir mola verir.</li>
-                                <li>Her moladan sonra döngü tekrar başlar.</li>
-                                <li>Zamanlayıcıyı durdurabilir, sıfırlayabilir veya yeniden başlatabilirsiniz.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     );
