@@ -17,6 +17,7 @@ import Login from './pages/Login'; // Login sayfası
 import SignUp from './pages/SignUp'; // Signup sayfası
 import Uni from './pages/Hayallerim/Uni'; // Uni sayfası buraya import edildi
 import Notlarım from './pages/Hayallerim/Notlarım'; // Uni sayfası buraya import edildi
+import Netlerim from './pages/hayallerim/NetHesaplama'; // Uni sayfası buraya import edildi
 
 
 import './index.css';
@@ -126,11 +127,20 @@ const App = () => {
               <Uni />
             </MainLayout>
           }
-        /><Route
+        />
+        <Route
           path="/hayallerim/notlarım"
           element={
             <MainLayout>
               <Notlarım />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/hayallerim/netlerim"
+          element={
+            <MainLayout>
+              <Netlerim />
             </MainLayout>
           }
         />

@@ -250,9 +250,15 @@ const Header = () => {
                                             <Link to="/hayallerim/uni" className="px-4 py-2 hover:bg-gray-100 block">
                                                 Üniversiteler
                                             </Link>
-                                        </li> <li>
+                                        </li> 
+                                        <li>
                                             <Link to="/hayallerim/notlarım" className="px-4 py-2 hover:bg-gray-100 block">
                                                 Notlarım
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/hayallerim/netlerim" className="px-4 py-2 hover:bg-gray-100 block">
+                                                Netlerim
                                             </Link>
                                         </li>
                                     </ul>
