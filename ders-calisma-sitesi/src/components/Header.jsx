@@ -97,21 +97,31 @@ const Header = () => {
     return (
         <header className="fixed top-0 left-0 right-0 z-50 ">
             {/* Üst Bilgi */}
-            <div className="bg-red-700 text-white w-full">
-                <div className="flex items-center justify-between px-6 h-[31px] text-sm max-w-screen-xl mx-auto">
-                    <div className="flex items-center gap-1 ml-10">
-                        <div className="flex items-center gap-1">
-                            <FaPhoneAlt className="text-xl text-white" />
-                            <span className="text-base font-medium">+90 555 555 55 55</span>
-                        </div>
-                        <IoIosMail className="text-3xl text-white ml-3" />
-                        <span className="text-base font-medium">@examplemail.com</span>
-                    </div>
-                    <div className="flex items-center gap-4 mr-9">
-                        <span>Şok Şok Fiyat: 99₺</span>
-                    </div>
-                </div>
-            </div>
+            <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-400 text-white w-full shadow-lg">
+  <div className="flex items-center justify-between px-8 h-[50px] text-sm max-w-screen-xl mx-auto">
+    {/* Sol Bölüm: Telefon ve Mail */}
+    <div className="flex items-center gap-6 ml-6">
+      <div className="flex items-center gap-2">
+        <FaPhoneAlt className="text-2xl text-yellow-300 animate-bounce" />
+        <span className="text-base font-semibold hover:underline cursor-pointer transition duration-300">
+          +90 555 555 55 55
+        </span>
+      </div>
+      <div className="flex items-center gap-2">
+        <IoIosMail className="text-3xl text-blue-200 hover:text-blue-400 transition duration-300" />
+        <span className="text-base font-semibold hover:underline cursor-pointer transition duration-300">
+          @examplemail.com
+        </span>
+      </div>
+    </div>
+    {/* Sağ Bölüm: Fiyat */}
+    <div className="flex items-center gap-6 mr-6">
+      <span className="bg-yellow-300 text-red-800 px-4 py-1 rounded-full font-bold shadow-md hover:shadow-lg transition duration-300">
+        Şok Şok Fiyat: 99₺
+      </span>
+    </div>
+  </div>
+</div>
 
 
             {/* Ana Menü */}
