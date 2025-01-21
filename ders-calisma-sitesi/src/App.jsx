@@ -20,6 +20,7 @@ import Notlarım from './pages/Hayallerim/Notlarım'; // Uni sayfası buraya imp
 import Netlerim from './pages/hayallerim/NetHesaplama'; // Uni sayfası buraya import edildi
 
 
+
 import './index.css';
 import Bilgiler from './pages/Bilgiler';
 
@@ -36,6 +37,7 @@ const App = () => {
             </MainLayout>
           }
         />
+        
 
         <Route
           path="/pomodoro"

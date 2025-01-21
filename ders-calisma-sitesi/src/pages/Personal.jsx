@@ -29,7 +29,7 @@ const Personal = () => {
     };
 
     return (
-        <div className="relative bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex flex-col items-center space-y-8 mx-auto">
+        <div className=" mt-[110px] relative bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex flex-col items-center space-y-8 mx-auto">
             {/* Sağ Alt Köşede Sabit İlerleme Çarkı */}
             <div className="fixed bottom-4 right-4 w-[110px] h-[110px] bg-white rounded-full shadow-lg p-2 z-50">
                 <CircularProgressbar
