@@ -5,7 +5,6 @@ const Uni = () => {
   const [selectedCity, setSelectedCity] = useState('');
   const [universities, setUniversities] = useState([]);
   const [selectedUni, setSelectedUni] = useState('');
-  const [selectedUniImage, setSelectedUniImage] = useState('');
 
   // Şehir ve üniversite verilerini çekme
   const fetchData = async () => {
@@ -16,9 +15,9 @@ const Uni = () => {
         const [city, unis] = line.split(':');
         const universities = unis
           ? unis.split(';').map((u) => {
-              const [uniName, uniImage] = u.split(',');
-              return { name: uniName.trim(), image: uniImage?.trim() || '' };
-            })
+            const [uniName] = u.split(',');
+            return { name: uniName.trim() };
+          })
           : [];
         return { city: city.trim(), universities };
       });
@@ -43,17 +42,11 @@ const Uni = () => {
     }
   }, [selectedCity, cities]);
 
-  // Üniversite seçimi yapıldığında çalışır
-  const handleSelectUni = (uni) => {
-    setSelectedUni(uni.name);
-    setSelectedUniImage(uni.image);
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-100 to-blue-50 p-4">
       {/* Şehir Seçim Bölümü */}
       <div className="bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex items-center space-x-8">
-        <div className="w-1/2">
+        <div className="w-full">
           <h2 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-yellow-600">
             Şehrinizi Seçin ve Üniversitenizi Bulun!
           </h2>
@@ -70,13 +63,6 @@ const Uni = () => {
             ))}
           </select>
         </div>
-        <div className="w-1/2 flex flex-col items-center justify-center">
-          <img
-            src="/public/selection-image.png"
-            alt="Şehir Seçim"
-            className="rounded-lg w-[300px] h-[300px] object-cover"
-          />
-        </div>
       </div>
 
       {/* Üniversite Listesi Bölümü */}
@@ -91,7 +77,7 @@ const Uni = () => {
               >
                 <h4 className="text-lg font-bold">{uni.name}</h4>
                 <button
-                  onClick={() => handleSelectUni(uni)}
+                  onClick={() => setSelectedUni(uni.name)}
                   className="mt-3 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
                 >
                   Seç
@@ -104,34 +90,13 @@ const Uni = () => {
         )}
       </div>
 
-      {/* Seçilen Üniversite Bölümü */}
+      {/* Seçilen Üniversite Başlığı */}
       {selectedUni && (
-        <div
-          id="target-section"
-          className="bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex items-center space-x-8 mt-8"
-          style={{ height: '420px' }}
-        >
-          <div className="w-1/2">
-            <h2 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-yellow-600">
-              {selectedUni}
-            </h2>
-            {selectedUniImage ? (
-              <p className="mt-6 text-lg text-gray-800 max-w-lg mx-auto bg-gradient-to-r from-green-50 to-white p-6 rounded-lg shadow-md border border-green-100">
-                Bu üniversite hakkında daha fazla bilgi için aşağıdaki resmi inceleyin!
-              </p>
-            ) : (
-              <p className="mt-6 text-gray-500">Resim bulunamadı.</p>
-            )}
-          </div>
-          <div className="w-1/2 flex flex-col items-center justify-center">
-            {selectedUniImage && (
-              <img
-                src={selectedUniImage}
-                alt={selectedUni}
-                className="rounded-lg w-[350px] h-[350px] object-cover"
-              />
-            )}
-          </div>
+        <div className="bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] mt-8 flex flex-col items-center">
+          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
+            HAYALİMDEKİ ÜNİVERSİTE
+          </h1>
+          <p className="text-2xl font-bold mt-4 text-gray-800">{selectedUni}</p>
         </div>
       )}
     </div>

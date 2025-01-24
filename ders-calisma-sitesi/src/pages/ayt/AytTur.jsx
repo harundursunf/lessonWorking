@@ -73,7 +73,7 @@ export default function AytKonular() {
     };
 
     return (
-        <div className="mt-[100px] min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 to-purple-200 p-4">
+        <div className="mt-[130px] min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 to-purple-200 p-4">
             <div className="flex flex-col items-center mb-8">
                 <div
                     className="relative w-36 h-36 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-xl"

@@ -29,7 +29,7 @@ export default function AytKonular() {
     };
 
     return (
-        <div className=" mt-20 min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 to-purple-300 p-6">
+        <div className=" mt-[130px] min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 to-purple-300 p-6">
             <style>{`
                 @keyframes pulseGlow {
                     0% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
