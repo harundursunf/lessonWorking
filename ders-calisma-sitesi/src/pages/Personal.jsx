@@ -28,8 +28,13 @@ const Personal = () => {
         setGoals(goals.map((goal, i) => i === index ? { ...goal, completed: !goal.completed } : goal));
     };
 
+    // Hedef silme işlevi
+    const deleteGoal = (index) => {
+        setGoals(goals.filter((_, i) => i !== index));
+    };
+
     return (
-        <div className=" mt-[110px] relative bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex flex-col items-center space-y-8 mx-auto">
+        <div className="mt-[127px] relative bg-white p-5 rounded-3xl shadow-md w-full max-w-[1163px] flex flex-col items-center space-y-8 mx-auto">
             {/* Sağ Alt Köşede Sabit İlerleme Çarkı */}
             <div className="fixed bottom-4 right-4 w-[110px] h-[110px] bg-white rounded-full shadow-lg p-2 z-50">
                 <CircularProgressbar
@@ -86,6 +91,12 @@ const Personal = () => {
                                         />
                                         <span className={`ml-4 ${goal.completed ? 'line-through text-gray-500' : 'text-gray-800'}`}>{goal.text}</span>
                                     </div>
+                                    <button
+                                        onClick={() => deleteGoal(index)}
+                                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-transform transform hover:scale-105"
+                                    >
+                                        Sil
+                                    </button>
                                 </div>
                             ))
                         ) : (
